@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
-export default function Expenses() {
+export default function Search() {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
   const [synopsis, setSynopsis] = useState([]);
@@ -16,7 +17,7 @@ export default function Expenses() {
         setSearch("");
         setData([]);
       } else {
-        const resp = await fetch('https://api.jikan.moe/v3/search/anime?q=' + search, options);
+        const resp = await fetch(`https://api.jikan.moe/v3/search/anime?q=${search}`, options);
         const json = await resp.json();
         setData(json.results);
         setSynopsis([]);
@@ -36,7 +37,7 @@ export default function Expenses() {
       <div style={styles.nav}>
         <div style={{backgroundColor: "#36393f" }}>
           <input type="text" placeholder="Rechercher un anime..." onChange={search => setSearch(search.target.value)} value={search} style={styles.search}></input>
-        </div>
+        </div>t
       </div>
       <div style={styles.container}>
         {List(data)}
@@ -46,6 +47,8 @@ export default function Expenses() {
 }
 
 function List(items) {
+  const navigate = useNavigate();
+
   return (
    <ul style={styles.gridContainer}>
       {items.map((item) =>
@@ -54,14 +57,16 @@ function List(items) {
             {item.title}
           </div>
           <div styles={styles.image}>
-            <img src={item.image_url} style={styles.image}></img>
-          </div>
-          
+            <Link to={{ pathname: "/anime", state: {mal_id: item.mal_id }}}>
+              <img src={item.image_url} style={styles.image}></img>
+            </Link>
+           </div>
         </li>
       )}
    </ul>
  );
 }
+
 
 const styles = {
   page: {
