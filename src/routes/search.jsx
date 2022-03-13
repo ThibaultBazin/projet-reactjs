@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import "../index.css";
 
 export default function Search() {
   const [search, setSearch] = useState('');
   const [data, setData] = useState([]);
-  const [synopsis, setSynopsis] = useState([]);
 
   useEffect(() => {
     const options = {
-      "method": "get"
+      "method": "get",
     };
 
     // récupérer les données de l'api
@@ -17,27 +17,25 @@ export default function Search() {
         setSearch("");
         setData([]);
       } else {
-        const resp = await fetch(`https://api.jikan.moe/v3/search/anime?q=${search}`, options);
+        const resp = await fetch(`https://api.jikan.moe/v4/anime?q=${search}`, options);
         const json = await resp.json();
-        setData(json.results);
-        setSynopsis([]);
+        setData(json.data);
       }
     }
-    
+
     // timeout
     const timer = setTimeout(() => {
       getData();
     }, 500);
     // Annule le timeout si l'user écrit à nouveau avant qu'il soit exeute
     return () => clearTimeout(timer);
-
   }, [search])
   return (
     <main style={styles.page}>
       <div style={styles.nav}>
         <div style={{backgroundColor: "#36393f" }}>
-          <input type="text" placeholder="Rechercher un anime..." onChange={search => setSearch(search.target.value)} value={search} style={styles.search}></input>
-        </div>t
+          <input type="text" placeholder="Rechercher un anime..." onChange={search => setSearch(search.target.value)} style={styles.search}></input>
+        </div>
       </div>
       <div style={styles.container}>
         {List(data)}
@@ -57,8 +55,8 @@ function List(items) {
             {item.title}
           </div>
           <div styles={styles.image}>
-            <Link to={{ pathname: "/anime", state: {mal_id: item.mal_id }}}>
-              <img src={item.image_url} style={styles.image}></img>
+            <Link to={{ pathname: `/anime/${item.mal_id}`}}>
+              <img src={item.images.webp.image_url ?? item.images.jpg.image_url} style={styles.image}></img>
             </Link>
            </div>
         </li>
@@ -67,14 +65,15 @@ function List(items) {
  );
 }
 
-
 const styles = {
   page: {
     flex: 1,
-    backgroundColor: '#101010'
   },
   container: {
     flex: 1,
+    minHeight: "100%",
+    height: "100%",
+    maxHeight: "100%"
   },
   nav: {
     color: '#FFFFFF',
@@ -167,5 +166,4 @@ const styles = {
     whiteSpace: 'normal',
     textAlign: 'center'
   }
-
 };

@@ -1,4 +1,5 @@
 import { render } from "react-dom";
+import "./index.css";
 
 import {
   BrowserRouter,
@@ -15,7 +16,7 @@ render(
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="search" element={<Search />} />
-      <Route path="anime" element={<Anime />} />
+      <Route path="anime/:mal_id" element={<Anime />} />
     </Routes>
   </BrowserRouter>,
   rootElement
