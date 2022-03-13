@@ -1,71 +1,26 @@
-# Getting Started with Create React App
+# Projet reactjs
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Présentation :
 
-## Available Scripts
+C'est un site web qui permet de rechercher des animes.
 
-In the project directory, you can run:
+On retrouve les pages suivantes :
+- accueil : http://localhost:3000/
+- recherche : http://localhost:3000/search
+- details d'un anime : http://localhost:3000/anime/:id
 
-### `npm start`
+## Le code
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Le code est plutôt simple, il fonctionne grace à l'api jikan moe ; https://docs.api.jikan.moe/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Concernant la recherche des animes basés sur le nom, j'utilise un fetch : https://api.jikan.moe/v4/anime?q=${search}
+Pour l'affichage, j'affiche ces éléments grace à un item.map()
 
-### `npm test`
+Concernant la récupération d'un anime, je récupère l'id de l'url en params que je passe à l'api : https://api.jikan.moe/v4/anime/${mal_id}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Le css
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# projet-reactjs
+Le css est simple. J'ai rencontré une seule difficulté, c'était pour afficher 4 éléments sur la page par ligne.
+J'ai trouvé ma réponse avec un grid.
+display: 'grid',
+gridTemplateColumns: '1fr 1fr 1fr 1fr',

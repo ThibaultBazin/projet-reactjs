@@ -28,8 +28,7 @@ import ReactPlayer from "react-player";
       
     }, [firstRender])
 
-    console.log(data);
-
+    // la vidéo youtube trailer est désactivé car il y a un probleme, ça marque Vidéo non disponible
     let trailer;
     if (data && data.trailer) {
       trailer = <ReactPlayer url={data.trailer.url} style={{textAlign: "center"}}/>
@@ -47,8 +46,6 @@ import ReactPlayer from "react-player";
         <div>
           <p>Synopsis :</p>
           <p className="synopsis">{data && data.synopsis ? data.synopsis : ""}</p>
-          <p>Trailer :</p>
-          {trailer}
         </div>
       </main>
     );
